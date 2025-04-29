@@ -1,7 +1,8 @@
+import os
 import copy
 import numpy as np
 import time
-import os
+import matplotlib.pyplot as plt
 
 from Simulation.system_change import system_change
 from Simulation.sim_utils import sanitize_control_dic, sanitize_trajectory_dic, merge_dicts, get_metrics
@@ -70,3 +71,44 @@ def simulate(t_final, desired_speed, length, model_path, data_path):
 
     # Results and metrics
     get_metrics(merge_dicts(state[:-1]), merge_dicts(flat))
+
+    # Create results directory
+    results_dir = "results"
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir)
+
+    # Plotting the results
+    states = merge_dicts(state[:-1])
+    flat_states = merge_dicts(flat)
+
+    time_stamps = time_stamps[:-1]
+
+    plt.figure(figsize=(12, 6))
+    plt.subplot(2, 1, 1)
+    plt.plot(time_stamps, states['x'][:, 0], label='x')
+    plt.plot(time_stamps, flat_states['x'][:, 0], label='x_des')
+    plt.xlabel('Time (s)')
+    plt.ylabel('X Position (m)')
+    plt.legend()
+
+    plt.subplot(2, 1, 2)
+    plt.plot(time_stamps, states['x'][:, 1], label='y')
+    plt.plot(time_stamps, flat_states['x'][:, 1], label='y_des')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Y Position (m)')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.savefig(os.path.join(results_dir, 'trajectory_plot.png'))
+
+    # 3D plot
+    fig = plt.figure(figsize=(12, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot(states['x'][:, 0], states['x'][:, 1], time_stamps, label='Actual')
+    ax.plot(flat_states['x'][:, 0], flat_states['x'][:, 1], time_stamps, label='Desired')
+    ax.set_xlabel('X Position (m)')
+    ax.set_ylabel('Y Position (m)')
+    ax.set_zlabel('Time (s)')
+    ax.legend()
+    plt.savefig(os.path.join(results_dir, 'trajectory_3d_plot.png'))
+    plt.show()
