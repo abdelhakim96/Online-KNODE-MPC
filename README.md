@@ -25,6 +25,8 @@ The simulation generates the following results:
 *   **Trajectory Plot:** A plot of the desired and actual X and Y positions over time is saved as `trajectory_plot.png` in the `results` directory.
 *   **Trajectory 3D Plot:** A 3D plot of the desired and actual X and Y positions over time is saved as `trajectory_3d_plot.png` in the `results` directory.
 
+**Note:** This branch is currently configured to use a placeholder BlueROV model. The actual BlueROV model will be implemented once it is provided.
+
 ## Licensing
 
 This repository is licensed under the terms of GNU General Public License v3.0.

@@ -10,13 +10,17 @@
 
 ## Next Steps
 
-1.  Read `README.md` to understand installation and execution steps.
-2.  Identify dependencies listed in the README or project files.
-3.  Determine the command(s) needed to install dependencies.
-4.  Determine the command(s) needed to run the example.
-5.  Execute installation and example commands.
-    *   `pip install casadi==3.5.5 numpy==1.23.4 pip==22.3.1 scipy==1.9.3 setuptools==65.5.1 torch==1.13.0 typing_extensions==4.4.0 wheel==0.38.4`
-    *   `python3 main.py`
+*   Replace the simulation model and controller with a BlueROV model.
+*   Update the README and memory bank.
+*   Push the changes to the remote repository.
+
+1.  Wait for the BlueROV model to be provided.
+2.  Replace the existing quadrotor model with the BlueROV model in `Simulation/quadrotor.py`.
+3.  Replace the existing controller model with the BlueROV model in `simulate.py`.
+4.  Update the `KNODE/SavedModels/add_model_exp_weighting.pth` with the new BlueROV model.
+5.  Update the README to reflect the changes.
+6.  Update the memory bank to reflect the changes.
+7.  Commit and push the changes to the remote repository.
 
 ## Active Decisions & Considerations
 
